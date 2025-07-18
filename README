@@ -1,0 +1,21 @@
+# Chess Game Analyzer
+
+This script downloads your recent games from Lichess and/or chess.com, analyzes common positions for mistakes using Stockfish, and outputs an analysis PGN file.
+
+## Setup
+1. Install dependencies from `requirements.txt`:
+   pip install -r requirements.txt
+   - `requirements.txt`
+2. Download and install Stockfish (e.g., via Homebrew on macOS: `brew install stockfish`), and update `STOCKFISH_PATH` in conf.py.
+3. Configure `conf.py` with your usernames and other settings.
+
+## Usage
+Run the script with the config file as an argument:
+python script.py path/to/conf.py
+
+- The script will fetch new games (if any), process them, and generate `*_analysis.pgn`.
+- Run it periodically to update with new games.
+- Output includes progress logs and total/new game counts per platform.
+- All user-specific files (e.g., downloaded PGN games, pickle caches for positions/paths/game IDs, and the final analysis PGN) are stored in a directory structure like `tmp/<username>/`. The script automatically creates the `tmp` directory and the username subdirectory if they don't exist.
+
+Note: If both usernames are empty, the script will skip fetching but can still analyze cached data if available.
