@@ -7,16 +7,18 @@ from io import StringIO
 import os
 from datetime import datetime
 import pickle
+import importlib
 import json
 import sys
 
 # Load config from command-line argument
 if len(sys.argv) < 2:
-    raise ValueError("Usage: python script.py path/to/conf.py")
+    raise ValueError("Usage: python script.py path/to/config.py")
 config_path = sys.argv[1]
 config_dir = os.path.dirname(config_path)
 sys.path.append(config_dir)
-import conf as config  # Import the conf module
+config_module_name = os.path.splitext(os.path.basename(config_path))[0]
+config = importlib.import_module(config_module_name)
 
 # Extract variables from config
 LICHEss_USERNAME = config.LICHEss_USERNAME
